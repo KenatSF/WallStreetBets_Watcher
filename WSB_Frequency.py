@@ -28,8 +28,8 @@ def get_words_byrows(text):
         return filtered_words
 
 
-def get_data_freq(date_value_a, date_value_b, column_freq, data):
-    df = data.loc[(data["date"] >= date_value_a) & (data["date"] <= date_value_b), ["date", column_freq]]
+def get_data_freq(index_column, date_value_a, date_value_b, column_freq, data):
+    df = data.loc[(data[index_column] >= date_value_a) & (data[index_column] <= date_value_b), [index_column, column_freq]]
     try:
         n_grams = df.apply(lambda x: get_n2grams_byrows(x[column_freq]), axis=1)
         n_grams = n_grams.dropna()

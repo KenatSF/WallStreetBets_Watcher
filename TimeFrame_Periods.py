@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 def timestamp_specific_hour(fecha):
     return datetime.fromtimestamp(fecha)
 
-def timestamp_round_hour(fecha):
+def timestamp_rounding_hour(fecha):
     return datetime.fromtimestamp(fecha).replace(second=0, minute=0)
 
 def get_post_from_n_hours_ago(data_base, n_hours):
@@ -20,11 +20,11 @@ def get_post_from_n_hours_ago(data_base, n_hours):
     time_now = time_now.strftime("%Y-%m-%d %H:%M:%S")
     time_past = time_past.strftime("%Y-%m-%d %H:%M:%S")
 
-    df["hour"] = df["created"].apply(timestamp_round_hour)
+    df["date_time"] = df["created"].apply(timestamp_rounding_hour)
     #df["hour"] = df["created"].apply(timestamp_specific_hour)
     #df = df_reddit.loc[df_reddit["id"].isin(ids), :]
 
-    df_filtered = df.loc[(df["hour"] >= time_past) & (df["hour"] <= time_now), :]
+    df_filtered = df.loc[(df["date_time"] >= time_past) & (df["date_time"] <= time_now), :]
 
     return df_filtered
 

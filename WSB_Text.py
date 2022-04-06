@@ -1,6 +1,6 @@
 
 import pandas as pd
-from emosent import get_emoji_sentiment_rank
+#from emosent import get_emoji_sentiment_rank
 import emoji
 import re
 from textblob import TextBlob
@@ -11,44 +11,43 @@ tknzr = TweetTokenizer()
 # EMOJIS
 def get_no_emojis(text):
     return emoji.emoji_count(str(text))
-
-def get_full_emojis_sentiment(text):
-    emojis_list = emoji.emoji_lis(str(text))
-    emojis_nodic = [key['emoji'] for key in emojis_list]
-    emojis = list(set(emojis_nodic))
-
-    if not emojis:
-        return 'nothing'
-    else:
-        negative = []
-        neutral = []
-        positive = []
-
-        for i in emojis:
-            try:
-                sentiment = get_emoji_sentiment_rank(i)
-                negative.append(float(sentiment['negative']))
-                neutral.append(float(sentiment['neutral']))
-                positive.append(float(sentiment['positive']))
-            except:
-                continue
-        if not negative or not neutral or not positive:
-            return 'nothing'
-        else:
-            negative_mean = sum(negative) / len(negative)
-            neutral_mean = sum(neutral) / len(neutral)
-            positive_mean = sum(positive) / len(positive)
-
-            sentiment_max = max([negative_mean, neutral_mean, positive_mean])
-
-            if sentiment_max == negative_mean:
-                return 'negative'
-            elif sentiment_max == neutral_mean:
-                return 'neutral'
-            elif sentiment_max == positive_mean:
-                return 'poisitive'
-            else:
-                return 'nothing'
+#def get_full_emojis_sentiment(text):
+#    emojis_list = emoji.emoji_lis(str(text))
+#    emojis_nodic = [key['emoji'] for key in emojis_list]
+#    emojis = list(set(emojis_nodic))
+#
+#    if not emojis:
+#        return 'nothing'
+#    else:
+#        negative = []
+#        neutral = []
+#        positive = []
+#
+#        for i in emojis:
+#            try:
+#                sentiment = get_emoji_sentiment_rank(i)
+#                negative.append(float(sentiment['negative']))
+#                neutral.append(float(sentiment['neutral']))
+#                positive.append(float(sentiment['positive']))
+#            except:
+#                continue
+#        if not negative or not neutral or not positive:
+#            return 'nothing'
+#        else:
+#            negative_mean = sum(negative) / len(negative)
+#            neutral_mean = sum(neutral) / len(neutral)
+#            positive_mean = sum(positive) / len(positive)
+#
+#            sentiment_max = max([negative_mean, neutral_mean, positive_mean])
+#
+#            if sentiment_max == negative_mean:
+#                return 'negative'
+#            elif sentiment_max == neutral_mean:
+#                return 'neutral'
+#            elif sentiment_max == positive_mean:
+#                return 'poisitive'
+#            else:
+#                return 'nothing'
 
 # CLEAING TEXT
 def delete_emojis(text):
