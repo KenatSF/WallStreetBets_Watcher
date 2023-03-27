@@ -1,5 +1,7 @@
 
 from datetime import datetime, timedelta
+import os
+import pandas as pd
 
 # DATE
 def timestamp_specific_hour(fecha):
@@ -30,4 +32,16 @@ def get_post_from_n_hours_ago(data_base, n_hours):
 
 
 
+def get_hot_reddit(path, id_database, reddit_database):
+    os.chdir(path)
+    df_id = pd.read_csv(id_database)
+    ids = list(df_id["ids"])
+    df_reddit = pd.read_csv(reddit_database)
+
+    df_reddit["date_hour"] = df_reddit["created"].apply(timestamp_specific_hour)
+    df_reddit["date"] = df_reddit["created"].apply(timestamp_rounding_hour)
+
+    df = df_reddit.loc[df_reddit["id"].isin(ids), :]
+
+    return df
 
