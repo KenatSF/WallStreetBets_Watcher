@@ -2,7 +2,7 @@ from TimeFrame_Periods import get_post_from_n_hours_ago
 from WSB_Frequency import get_data_freq
 from WSB_Plot import plot_pmi_logfreq
 from WSB_Text import cleantext
-from Loading_Data import get_data_reddit_hot
+from Downloading_Data import get_data_reddit_hot
 import pandas as pd
 from dotenv import load_dotenv
 import os
